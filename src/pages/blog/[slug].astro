@@ -1,0 +1,19 @@
+---
+import BaseLayout from "~/layouts/BaseLayout.astro";
+
+export const getStaticPaths = () => {
+  // Placeholder until content collections populate routes in Phase 3.
+  return [];
+};
+
+const { slug } = Astro.params;
+---
+<BaseLayout title={`Draft: ${slug}`} description="Post content will be available soon.">
+  <article>
+    <h1>Post coming soon</h1>
+    <p>
+      The route <code>{`/blog/${slug}`}</code> is scaffolded. Content collections will supply rich posts
+      in the next phase.
+    </p>
+  </article>
+</BaseLayout>
