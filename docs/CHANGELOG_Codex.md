@@ -54,7 +54,7 @@
 - `src/pages/blog/[slug].astro:1` emit article JSON-LD, canonical metadata, and enriched sidebar details.
 
 ### 2025-11-05T14:58Z — chore: add github pages workflow
-- `.github/workflows/deploy.yml:1` configure CI to build with Node 20 and deploy artifacts via Pages.
+- `.github/workflows/deploy.yml:1` configure CI to build with Node 20 and deploy artifacts via Pages (updated to remove unsupported `deployments` block).
 - `docs/DEPLOY_GUIDE.md:1` document first deploy, DNS cutover, and rollback guidance for Pages model.
 
 ### 2025-11-05T15:02Z — chore: surface blog link in marketing nav

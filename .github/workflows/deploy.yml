@@ -10,11 +10,6 @@ permissions:
   pages: write
   id-token: write
 
-deployments:
-  pages:
-    environments:
-      - github-pages
-
 concurrency:
   group: "pages"
   cancel-in-progress: false
