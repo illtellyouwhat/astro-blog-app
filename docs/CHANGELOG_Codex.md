@@ -56,3 +56,7 @@
 ### 2025-11-05T14:58Z — chore: add github pages workflow
 - `.github/workflows/deploy.yml:1` configure CI to build with Node 20 and deploy artifacts via Pages.
 - `docs/DEPLOY_GUIDE.md:1` document first deploy, DNS cutover, and rollback guidance for Pages model.
+
+### 2025-11-05T15:02Z — chore: surface blog link in marketing nav
+- `architech-web-forge/src/components/Navigation.tsx:33` add `/blog/` entry to desktop navigation.
+- `architech-web-forge/src/components/Navigation.tsx:62` mirror `/blog/` link in mobile drawer menu.
