@@ -1,0 +1,30 @@
+:root,
+html[data-theme="light"] {
+  --color-fill: 247, 249, 252;
+  --color-fill-secondary: 255, 255, 255;
+  --color-card: 244, 247, 252;
+  --color-modal: 255, 255, 255;
+  --color-text: 33, 37, 41;
+  --color-text-dodge: 93, 102, 112;
+  --color-text-active: 32, 80, 129;
+  --color-border: 199, 209, 222;
+}
+
+html[data-theme="dark"] {
+  --color-fill: 23, 25, 29;
+  --color-fill-secondary: 28, 31, 36;
+  --color-card: 35, 39, 46;
+  --color-modal: 23, 25, 29;
+  --color-text: 226, 232, 240;
+  --color-text-dodge: 148, 163, 184;
+  --color-text-active: 90, 173, 255;
+  --color-border: 71, 85, 105;
+}
+
+:root {
+  color-scheme: light;
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+}

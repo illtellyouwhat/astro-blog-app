@@ -1,25 +1,62 @@
 ---
+import "~/styles/tokens.css";
+import "@aa/astro-yi/src/styles/index.css";
+import BaseHead from "@aa/astro-yi/src/components/BaseHead.astro";
+import ThemeIcon from "@aa/astro-yi/src/components/ThemeIcon.astro";
+import ScrollToTop from "@aa/astro-yi/src/components/ScrollToTop.astro";
+import Footer from "@aa/astro-yi/src/components/Footer.astro";
+import { site } from "@/consts";
+
 export interface Props {
   title?: string;
   description?: string;
+  publishedAt?: Date;
 }
 
 const {
-  title = "Automation Architech Blog",
-  description = "Insights on automation, architecture, and operations from Automation Architech."
+  title = `${site.title} Blog`,
+  description = site.description,
+  publishedAt
 } = Astro.props;
 ---
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
-    <meta name="description" content={description} />
-  </head>
-  <body>
-    <main>
-      <slot />
+<html lang="en" class="scroll-smooth">
+  <BaseHead title={title} description={description} />
+  <body class="min-h-screen bg-skin-secondary text-skin-base">
+    <header class="fixed inset-x-0 top-0 z-40 border-b border-skin-base/20 bg-skin-fill/95 backdrop-blur">
+      <div class="container flex items-center justify-between py-4">
+        <a class="text-lg font-semibold tracking-tight hover:text-skin-active" href="/">{site.title}</a>
+        <nav class="hidden items-center gap-6 text-sm font-medium md:flex">
+          <a class="transition hover:text-skin-active" href="/">Home</a>
+          <a class="transition hover:text-skin-active" href="/blog/">Blog</a>
+        </nav>
+        <div class="flex items-center gap-3">
+          <ThemeIcon />
+        </div>
+      </div>
+    </header>
+
+    <main class="container grid gap-10 pt-28 pb-24 md:grid-cols-[minmax(0,1.7fr)_minmax(0,0.5fr)]">
+      <section class="space-y-8">
+        <slot />
+      </section>
+      <aside class="space-y-6">
+        <div class="rounded-xl border border-skin-base/20 bg-skin-card p-5 shadow-card">
+          <h2 class="text-sm font-semibold uppercase tracking-wide text-skin-dodge">
+            About Automation Architech
+          </h2>
+          <p class="mt-3 text-sm leading-relaxed text-skin-base">
+            We design automation-first systems, resilient pipelines, and editorial workflows that
+            are host-agnostic by default. This blog captures the playbooks behind those launches.
+          </p>
+        </div>
+        <slot name="aside" />
+      </aside>
     </main>
+
+    <footer class="relative">
+      <Footer title={title} date={publishedAt} url={Astro.url.pathname} />
+    </footer>
+    <ScrollToTop />
   </body>
 </html>

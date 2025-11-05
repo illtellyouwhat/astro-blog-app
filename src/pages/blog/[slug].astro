@@ -12,7 +12,7 @@ export const getStaticPaths = async () => {
 };
 
 const { post } = Astro.props as { post: CollectionEntry<"posts"> };
-const { Content } = await post.render();
+const { Content, headings } = await post.render();
 
 const description = post.data.excerpt ?? "Read the latest update from Automation Architech.";
 const publicationDate = post.data.date.toLocaleDateString(undefined, {
@@ -20,29 +20,78 @@ const publicationDate = post.data.date.toLocaleDateString(undefined, {
   month: "long",
   day: "numeric"
 });
+const formattedDateForAside = post.data.date.toLocaleDateString(undefined, {
+  year: "numeric",
+  month: "short",
+  day: "numeric"
+});
+
+const headingIndent = (depth: number) => {
+  if (depth <= 2) return "";
+  if (depth === 3) return "pl-4";
+  if (depth === 4) return "pl-8";
+  return "pl-10";
+};
 ---
-<BaseLayout title={post.data.title} description={description}>
-  <article>
-    <header>
-      <h1>{post.data.title}</h1>
-      <p>
+<BaseLayout title={post.data.title} description={description} publishedAt={post.data.date}>
+  <article class="space-y-8">
+    <header class="space-y-4">
+      <h1 class="text-4xl font-semibold tracking-tight text-skin-base">{post.data.title}</h1>
+      <div class="flex flex-wrap items-center gap-3 text-sm text-skin-dodge">
         <time datetime={post.data.date.toISOString()}>{publicationDate}</time>
-      </p>
-      {post.data.tags.length > 0 && (
-        <p>
-          Tags:{" "}
-          {post.data.tags.map((tag, index) => (
-            <span key={`${post.id}-tag-${tag}`}>
-              {index > 0 ? ", " : ""}
-              {tag}
-            </span>
-          ))}
-        </p>
-      )}
+        {post.data.tags.length > 0 && (
+          <ul class="flex flex-wrap items-center gap-2">
+            {post.data.tags.map((tag) => (
+              <li class="rounded-full border border-skin-base/40 bg-skin-fill px-3 py-1 text-xs font-medium text-skin-dodge">
+                #{tag}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </header>
 
-    <section>
+    <div class="markdown-body prose prose-slate max-w-none">
       <Content />
-    </section>
+    </div>
   </article>
+
+  <div slot="aside" class="space-y-6">
+    <div class="rounded-xl border border-skin-base/20 bg-skin-card p-5 shadow-card">
+      <h2 class="text-sm font-semibold uppercase tracking-wide text-skin-dodge">Article details</h2>
+      <dl class="mt-3 space-y-2 text-sm">
+        <div class="flex justify-between gap-3">
+          <dt class="text-skin-dodge">Published</dt>
+          <dd>{formattedDateForAside}</dd>
+        </div>
+        {post.data.tags.length > 0 && (
+          <div>
+            <dt class="text-skin-dodge">Topics</dt>
+            <dd class="mt-1 flex flex-wrap gap-2">
+              {post.data.tags.map((tag) => (
+                <span class="rounded-full border border-skin-base/40 bg-skin-fill px-3 py-1 text-xs font-medium text-skin-dodge">
+                  {tag}
+                </span>
+              ))}
+            </dd>
+          </div>
+        )}
+      </dl>
+    </div>
+    {headings.length > 0 && (
+      <nav class="rounded-xl border border-skin-base/20 bg-skin-card p-5 shadow-card">
+        <h2 class="text-sm font-semibold uppercase tracking-wide text-skin-dodge">On this page</h2>
+        <ol class="mt-3 space-y-2 text-sm">
+          {headings.map((heading) => {
+            const indentClass = headingIndent(heading.depth);
+            return (
+              <li class={`${indentClass} text-skin-dodge`}>
+                <a class="hover:text-skin-active" href={`#${heading.slug}`}>{heading.text}</a>
+              </li>
+            );
+          })}
+        </ol>
+      </nav>
+    )}
+  </div>
 </BaseLayout>

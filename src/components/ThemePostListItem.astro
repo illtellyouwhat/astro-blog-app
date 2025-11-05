@@ -1,0 +1,22 @@
+---
+import PostViewTitle from "@aa/astro-yi/src/components/PostViewTitle.astro";
+import getUrl from "@aa/astro-yi/src/utils/getUrl";
+import type { ThemePostMeta } from "~/utils/themeAdapter";
+
+const { post } = Astro.props as { post: ThemePostMeta };
+const permalink = `${getUrl("/blog/")}${post.slug}/`;
+---
+<li class="space-y-3 rounded-xl border border-skin-base/30 bg-skin-card/80 p-6 shadow-card transition hover:border-skin-base hover:shadow-lg">
+  <PostViewTitle
+    slug={permalink}
+    title={post.title}
+    date={post.date}
+    tags={post.tags}
+    draft={post.draft}
+  />
+  {post.description && <p class="text-sm text-skin-dodge">{post.description}</p>}
+  <a class="inline-flex items-center text-sm font-medium text-skin-active hover:underline" href={permalink}>
+    Read more
+    <i class="ml-2 ri-arrow-right-line text-base" />
+  </a>
+</li>

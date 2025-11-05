@@ -3,7 +3,9 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "~/*": ["src/*"]
+      "~/*": ["src/*"],
+      "@/*": ["node_modules/@aa/astro-yi/src/*"],
+      "@/consts": ["src/theme/consts.ts"]
     }
   }
 }

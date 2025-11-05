@@ -27,3 +27,21 @@
 - `src/pages/blog/index.astro:1` list published posts with draft filtering, sorting, and metadata.
 - `src/pages/blog/[slug].astro:1` render individual posts via static paths and MDX content.
 - `docs/AUTHORING.md:1` document authoring workflow, front matter requirements, and publishing steps.
+
+### 2025-11-05T14:42Z — feat: integrate astro-yi theme styling
+- `package.json:16` add astro-yi theme, tailwind integration, and align dependencies.
+- `package-lock.json:1` refresh lockfile with theme + tailwind packages.
+- `astro.config.mjs:1` enable tailwind plugin and alias theme modules with local overrides.
+- `tsconfig.json:1` mirror alias mappings for TypeScript tooling.
+- `tailwind.config.mjs:1` register theme-aware token mapping and scan dependency templates.
+- `src/styles/tokens.css:1` define brand color variables consumed by the theme.
+- `src/theme/consts.ts:1` override theme metadata (site, nav, analytics) while keeping defaults inert.
+- `src/layouts/BaseLayout.astro:1` wrap pages with astro-yi components and themed shell.
+- `src/components/ThemePostListItem.astro:1` adapt post listings through theme typography.
+- `src/utils/themeAdapter.ts:1` normalize collection entries for theme-friendly consumption.
+- `src/pages/blog/index.astro:1` render listings via themed layout with sidebar widgets.
+- `src/pages/blog/[slug].astro:1` present article view with themed metadata panels and TOC.
+- `public/toggle-theme.js:1` ship lightweight theme toggle script expected by astro-yi header.
+- `public/favicon.svg:1` add Automation Architech icon aligned with new styling.
+- `public/images/blog-avatar.svg:1` provide avatar asset referenced by theme profile.
+- `docs/OPERATIONS.md:1` document `npm link` workflow for local theme overrides.
