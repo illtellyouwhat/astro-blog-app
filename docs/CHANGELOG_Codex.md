@@ -17,3 +17,13 @@
 - `src/pages/blog/index.astro:1` scaffold `/blog` index with placeholder messaging.
 - `src/pages/blog/[slug].astro:1` stub dynamic route with static paths placeholder ahead of content collections.
 - `public/robots.txt:1` expose sitemap location and crawl policy for the blog.
+
+### 2025-11-05T14:25Z — chore: pin node runtime
+- `.nvmrc:1` document Node.js 20 baseline to avoid engine mismatch warnings locally.
+
+### 2025-11-05T14:27Z — feat: define content collections
+- `src/content/config.ts:1` declare typed content collection schema for posts.
+- `src/content/posts/hello-world.mdx:1` seed initial published post with front matter contract.
+- `src/pages/blog/index.astro:1` list published posts with draft filtering, sorting, and metadata.
+- `src/pages/blog/[slug].astro:1` render individual posts via static paths and MDX content.
+- `docs/AUTHORING.md:1` document authoring workflow, front matter requirements, and publishing steps.

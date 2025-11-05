@@ -1,19 +1,48 @@
 ---
 import BaseLayout from "~/layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
 
-export const getStaticPaths = () => {
-  // Placeholder until content collections populate routes in Phase 3.
-  return [];
+export const getStaticPaths = async () => {
+  const posts = await getCollection("posts", ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post }
+  }));
 };
 
-const { slug } = Astro.params;
+const { post } = Astro.props as { post: CollectionEntry<"posts"> };
+const { Content } = await post.render();
+
+const description = post.data.excerpt ?? "Read the latest update from Automation Architech.";
+const publicationDate = post.data.date.toLocaleDateString(undefined, {
+  year: "numeric",
+  month: "long",
+  day: "numeric"
+});
 ---
-<BaseLayout title={`Draft: ${slug}`} description="Post content will be available soon.">
+<BaseLayout title={post.data.title} description={description}>
   <article>
-    <h1>Post coming soon</h1>
-    <p>
-      The route <code>{`/blog/${slug}`}</code> is scaffolded. Content collections will supply rich posts
-      in the next phase.
-    </p>
+    <header>
+      <h1>{post.data.title}</h1>
+      <p>
+        <time datetime={post.data.date.toISOString()}>{publicationDate}</time>
+      </p>
+      {post.data.tags.length > 0 && (
+        <p>
+          Tags:{" "}
+          {post.data.tags.map((tag, index) => (
+            <span key={`${post.id}-tag-${tag}`}>
+              {index > 0 ? ", " : ""}
+              {tag}
+            </span>
+          ))}
+        </p>
+      )}
+    </header>
+
+    <section>
+      <Content />
+    </section>
   </article>
 </BaseLayout>

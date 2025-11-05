@@ -1,15 +1,50 @@
 ---
 import BaseLayout from "~/layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
 
 const pageTitle = "Automation Architech Blog";
 const pageDescription = "Latest updates on automation, architecture, and workflows.";
+
+const posts = (await getCollection("posts", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime()
+);
 ---
 <BaseLayout title={pageTitle} description={pageDescription}>
   <section>
     <h1>{pageTitle}</h1>
-    <p>
-      The blog foundation is scaffolded. Content collections and themed layouts will be wired in
-      upcoming phases.
-    </p>
+    <p>{pageDescription}</p>
+
+    <ul>
+      {posts.map((post) => (
+        <li key={post.id}>
+          <article>
+            <h2>
+              <a href={`/blog/${post.slug}/`}>{post.data.title}</a>
+            </h2>
+            <p>{post.data.excerpt}</p>
+            <p>
+              <time datetime={post.data.date.toISOString()}>
+                {post.data.date.toLocaleDateString(undefined, {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric"
+                })}
+              </time>
+            </p>
+            {post.data.tags.length > 0 && (
+              <p>
+                Tags:{" "}
+                {post.data.tags.map((tag, index) => (
+                  <span key={`${post.id}-tag-${tag}`}>
+                    {index > 0 ? ", " : ""}
+                    {tag}
+                  </span>
+                ))}
+              </p>
+            )}
+          </article>
+        </li>
+      ))}
+    </ul>
   </section>
 </BaseLayout>
