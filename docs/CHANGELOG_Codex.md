@@ -60,3 +60,6 @@
 ### 2025-11-05T15:02Z — chore: surface blog link in marketing nav
 - `architech-web-forge/src/components/Navigation.tsx:33` add `/blog/` entry to desktop navigation.
 - `architech-web-forge/src/components/Navigation.tsx:62` mirror `/blog/` link in mobile drawer menu.
+
+### 2025-11-05T15:08Z — docs: local setup walkthrough
+- `docs/LOCAL_SETUP_AND_TEST.md:1` publish step-by-step local install, QA content workflow, validation, and cleanup guidance.
