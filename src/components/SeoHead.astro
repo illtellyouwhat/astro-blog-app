@@ -32,6 +32,10 @@ const {
 const siteOrigin = Astro.site ?? new URL(site.url);
 const canonicalUrl = new URL(slug, siteOrigin);
 const absoluteOgImage = hero ? new URL(hero, siteOrigin).href : undefined;
+const plausibleDomain = import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN;
+const plausibleScript = import.meta.env.PUBLIC_PLAUSIBLE_SCRIPT ?? "https://plausible.io/js/script.js";
+const plausibleApi = import.meta.env.PUBLIC_PLAUSIBLE_API ?? "https://plausible.io/api/event";
+const plausibleDnt = import.meta.env.PUBLIC_PLAUSIBLE_DNT ?? "true";
 ---
 <head>
   <meta charset="utf-8" />
@@ -67,6 +71,16 @@ const absoluteOgImage = hero ? new URL(hero, siteOrigin).href : undefined;
   <script is:inline src={getUrl("/toggle-theme.js")} />
 
   {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+
+  {plausibleDomain && (
+    <script
+      defer
+      data-domain={plausibleDomain}
+      data-api={plausibleApi}
+      data-dnt={plausibleDnt}
+      src={plausibleScript}
+    />
+  )}
 
   <GoogleAnalytics />
   <UmamiAnalytics />

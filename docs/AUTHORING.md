@@ -17,12 +17,14 @@ excerpt: "120–160 character summary."           # Optional; surfaces in listin
 hero: "/blog/images/feature.png"                # Optional; keep under /public/images
 draft: false                                    # Required; set true to hide from production
 canonical: "https://automationarchitech.com/blog/custom-url/"  # Optional override
+comments: true                                  # Optional; set false to disable Utterances for a post
 ---
 ```
 
 Guidelines:
 - Use lowercase, hyphenated filenames (`2025-11-hello-world.mdx`) to keep slugs stable.
 - `draft: true` hides a post from the build; it remains visible in local development.
+- `comments: false` removes the Utterances widget even if global comments are enabled.
 - Keep `excerpt` concise—it feeds list summaries and meta tags.
 - If specifying `canonical`, ensure it matches the published URL exactly.
 

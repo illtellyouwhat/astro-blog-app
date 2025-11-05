@@ -9,7 +9,8 @@ const posts = defineCollection({
     excerpt: z.string().optional(),
     hero: z.string().optional(),
     draft: z.boolean().default(false),
-    canonical: z.string().url().optional()
+    canonical: z.string().url().optional(),
+    comments: z.boolean().default(true)
   })
 });
 

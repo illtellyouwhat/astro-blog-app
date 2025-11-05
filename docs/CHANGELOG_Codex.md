@@ -63,3 +63,12 @@
 
 ### 2025-11-05T15:08Z — docs: local setup walkthrough
 - `docs/LOCAL_SETUP_AND_TEST.md:1` publish step-by-step local install, QA content workflow, validation, and cleanup guidance.
+
+### 2025-11-05T15:15Z — feat: add comments and analytics toggles
+- `src/env.d.ts:1` declare public env variables for comments and Plausible.
+- `src/content/config.ts:1` add `comments` boolean to post schema.
+- `docs/AUTHORING.md:1` document `comments` front matter override.
+- `src/components/UtterancesComments.astro:1` render Utterances with GitHub Issue labels when enabled.
+- `src/pages/blog/[slug].astro:1` gate comments per post and append Utterances widget.
+- `src/components/SeoHead.astro:1` load Plausible script based on env configuration.
+- `docs/OPERATIONS.md:23` outline environment toggles for comments and analytics.

@@ -1,0 +1,31 @@
+---
+interface Props {
+  issueTerm?: string;
+}
+
+const repository = import.meta.env.PUBLIC_UTTERANCES_REPO;
+const label = import.meta.env.PUBLIC_UTTERANCES_LABEL ?? "blog-comment";
+const theme = import.meta.env.PUBLIC_UTTERANCES_THEME ?? "github-light";
+const issueTerm = Astro.props.issueTerm ?? Astro.url.pathname;
+const isEnabled = import.meta.env.PUBLIC_ENABLE_COMMENTS !== "false";
+---
+
+{repository && isEnabled && (
+  <section class="mt-16 rounded-xl border border-skin-base/20 bg-skin-card px-6 py-8 shadow-card">
+    <h2 class="text-lg font-semibold text-skin-base">Join the conversation</h2>
+    <p class="mt-1 text-sm text-skin-dodge">
+      Comments are powered by GitHub Issues. You’ll need a GitHub account to participate.
+    </p>
+    <div class="mt-6">
+      <script
+        src="https://utteranc.es/client.js"
+        repo={repository}
+        issue-term={issueTerm}
+        label={label}
+        theme={theme}
+        crossorigin="anonymous"
+        async
+      />
+    </div>
+  </section>
+)}
