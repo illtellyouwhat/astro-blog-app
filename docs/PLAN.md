@@ -1,20 +1,22 @@
 # PLAN
 
-## Alignment Report
-- Blog lives at `/blog` while existing React app keeps `/` routes.
-- Separate GitHub Pages deployment (Model A) for the blog; marketing site remains independent.
-- Reference document `/mnt/data/astro_blog_pipeline_llm_reference_up_to_date.md` is missing; awaiting guidance or alternate path.
+## Alignment Summary
+- Blog mounts at `/blog` while existing Vite marketing SPA retains `/`.
+- Deployment model: GitHub Pages (Model A) with canonical host `https://automationarchitech.com`.
+- Astro blog keeps theme-agnostic content collections; astro-yi provides styling only.
+- Reference file is available at `docs/astro_blog_pipeline_llm_reference_up_to_date.md`.
 
-## Phase Checklist
-- [ ] Phase 2 — Scaffold Astro blog foundation.
-- [ ] Phase 3 — Define content collections and authoring contract.
-- [ ] Phase 4 — Integrate astro-yi theme without coupling content model.
-- [ ] Phase 5 — Implement SEO and routing safeguards.
-- [ ] Phase 6 — Configure GitHub Pages CI/CD workflow.
-- [ ] Phase 7 — Add marketing site navigation link to `/blog`.
-- [ ] Phase 8 — Document local setup and testing workflow.
-- [ ] Phase 9 — Add comments and analytics toggles.
-- [ ] Phase 10 — Finalize documentation deliverables.
+## Phase Outcomes
+- [x] Phase 2 — Astro scaffold with MDX, sitemap, Tailwind baseline; build verified.
+- [x] Phase 3 — Content collections (`posts`), authoring contract, hello-world seed post.
+- [x] Phase 4 — astro-yi integration with theme adapters, tokens, assets.
+- [x] Phase 5 — SEO head, canonical routing, JSON-LD, sitemap verification.
+- [x] Phase 6 — GitHub Pages workflow and deployment playbook documented.
+- [x] Phase 7 — Marketing site navigation now links to `/blog`.
+- [x] Phase 8 — Local setup & test walkthrough published.
+- [x] Phase 9 — Comments (Utterances) & analytics (Plausible) toggles shipped.
+- [x] Phase 10 — Documentation finalized; summaries updated.
 
-## TODO
-- [ ] Update phase statuses and details as work progresses.
+## Next Steps
+- Establish repo secrets/variables (`SITE_URL`, Utterances, Plausible) before first deploy.
+- Prepare production content and migrate any legacy posts into `src/content/posts/`.

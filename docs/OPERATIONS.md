@@ -4,9 +4,16 @@
 - Target: GitHub Pages workflow for `illitelyouwhat/astro-blog-app` with artifact upload + deploy.
 - Custom domain: `blog.automationarchitech.com` with canonical host `https://automationarchitech.com`.
 
-## TODO
-- [ ] Add runbook for CI variables (`SITE_URL`, Plausible, Utterances).
-- [ ] Capture rollback and cache-invalidation procedures.
+## CI Variables
+- `SITE_URL` (Repository Variable): canonical host used in builds and sitemap.
+- `PUBLIC_ENABLE_COMMENTS`: defaults to `true`; set to `false` to disable Utterances globally.
+- `PUBLIC_UTTERANCES_REPO`: (required when comments enabled) e.g., `illtellyouwhat/astro-blog-app`.
+- `PUBLIC_UTTERANCES_LABEL`: optional GitHub issue label for new threads.
+- `PUBLIC_UTTERANCES_THEME`: customise Utterances appearance.
+- `PUBLIC_PLAUSIBLE_DOMAIN`: required to enable Plausible analytics (e.g., `automationarchitech.com`).
+- `PUBLIC_PLAUSIBLE_API`: optional custom API endpoint for self-hosted Plausible.
+- `PUBLIC_PLAUSIBLE_SCRIPT`: optional custom script URL.
+- `PUBLIC_PLAUSIBLE_DNT`: defaults to `true`; set `false` to ignore browser Do Not Track.
 
 ## Local Theme Overrides
 - Keep the git-tagged dependency `@aa/astro-yi@git+https://github.com/illtellyouwhat/astro-yi_theme.git#v1.0.0` committed to `package.json`.
@@ -24,14 +31,9 @@
 - `@aa/astro-yi` currently pulls in `astro-expressive-code@0.33.5`, which lists a peer dependency on Astro `^4.x`. Our project runs Astro 5.x without runtime issues, but npm will warn about the version mismatch during install. Until the theme updates, treat this as cosmetic.
 - If a future Astro upgrade breaks the theme, either pin Astro to a known-good version or fork `@aa/astro-yi`/`astro-expressive-code` and adjust the peer dependency.
 
-## Feature Toggles (Env Vars)
-- `PUBLIC_ENABLE_COMMENTS` (`"true"` default) — set to `"false"` to remove Utterances globally.
-- `PUBLIC_UTTERANCES_REPO` (`required`) — GitHub repo used for Utterances, e.g. `illtellyouwhat/astro-blog-app`.
-- `PUBLIC_UTTERANCES_LABEL` (optional) — custom label applied to created issues.
-- `PUBLIC_UTTERANCES_THEME` (optional) — Utterances theme (`github-light`, `github-dark`, etc.).
-- `PUBLIC_PLAUSIBLE_DOMAIN` (`required` to enable analytics) — domain name registered with Plausible.
-- `PUBLIC_PLAUSIBLE_API` (optional) — Plausible API endpoint (defaults to `https://plausible.io/api/event`).
-- `PUBLIC_PLAUSIBLE_SCRIPT` (optional) — Plausible script URL (defaults to `https://plausible.io/js/script.js`).
-- `PUBLIC_PLAUSIBLE_DNT` (optional) — set to `"true"` to respect Do Not Track (default), `"false"` to disable.
-
 Per-post override: set `comments: false` in front matter to hide Utterances for individual articles.
+
+## Rollback & Cache
+- **Rollback:** revert or cherry-pick fixes on `main`; Pages workflow redeploys automatically.
+- **Emergency fixes:** push a hotfix branch or use `git revert` to roll back.
+- **Cache:** GitHub Pages handles cache headers; asset filenames are hashed so redeploying updates references automatically. For manual busting, append query strings or rename assets.
