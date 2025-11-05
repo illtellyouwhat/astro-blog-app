@@ -4,12 +4,19 @@ import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 import { fileURLToPath } from "node:url";
 
-const canonicalHost = (process.env.SITE_URL || "https://automationarchitech.com").replace(/\/+$/, "");
-const basePath = process.env.BASE_PATH || "/blog";
+const siteEnv = process.env.SITE_URL || "https://automationarchitech.com";
+const canonicalHost = siteEnv.replace(/\/+$/, "");
+const siteUrl = new URL(siteEnv);
+const sitePath = siteUrl.pathname.replace(/\/$/, "");
+const basePath =
+  process.env.BASE_PATH ||
+  `${sitePath}${sitePath.endsWith("/blog") ? "" : "/blog"}`.replace(/\/\/+/g, "/") ||
+  "/blog";
+const normalizedBase = basePath.startsWith("/") ? basePath : `/${basePath}`;
 
 export default defineConfig({
   site: canonicalHost,
-  base: basePath,
+  base: normalizedBase,
   trailingSlash: "always",
   integrations: [mdx(), sitemap(), tailwind({ applyBaseStyles: false })],
   output: "static",

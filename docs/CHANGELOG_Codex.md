@@ -74,6 +74,6 @@
 - `docs/OPERATIONS.md:23` outline environment toggles for comments and analytics.
 
 ### 2025-11-05T15:30Z — chore: allow base path overrides
-- `astro.config.mjs:1` honor `BASE_PATH` env for staging hosts like GitHub Pages.
-- `docs/OPERATIONS.md:1` document `BASE_PATH` variable for CI configuration.
-- `.github/workflows/deploy.yml:36` pass `BASE_PATH` and `SITE_URL` via environment instead of inline command.
+- `astro.config.mjs:1` derive base path from `SITE_URL` (with optional `BASE_PATH` override) so GitHub Pages serves assets correctly.
+- `docs/OPERATIONS.md:1` clarify optional `BASE_PATH` usage.
+- `.github/workflows/deploy.yml:36` pass `SITE_URL`/`BASE_PATH` env values to the build step.

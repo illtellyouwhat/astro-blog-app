@@ -10,7 +10,7 @@
 - `PUBLIC_UTTERANCES_REPO`: (required when comments enabled) e.g., `illtellyouwhat/astro-blog-app`.
 - `PUBLIC_UTTERANCES_LABEL`: optional GitHub issue label for new threads.
 - `PUBLIC_UTTERANCES_THEME`: customise Utterances appearance.
-- `BASE_PATH`: defaults to `/blog`. Set to `/astro-blog-app/blog` when testing on GitHub Pages, or `/blog` for production domains.
+- `BASE_PATH` (optional): override the derived base path. By default the build appends `/blog` to the path portion of `SITE_URL`, so GitHub Pages project sites (e.g., `/astro-blog-app`) work automatically.
 - `PUBLIC_PLAUSIBLE_DOMAIN`: required to enable Plausible analytics (e.g., `automationarchitech.com`).
 - `PUBLIC_PLAUSIBLE_API`: optional custom API endpoint for self-hosted Plausible.
 - `PUBLIC_PLAUSIBLE_SCRIPT`: optional custom script URL.
