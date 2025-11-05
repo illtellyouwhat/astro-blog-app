@@ -1,0 +1,74 @@
+---
+import { site, analytics } from "@/consts";
+import UmamiAnalytics from "@aa/astro-yi/src/components/UmamiAnalytics.astro";
+import GoogleAnalytics from "@aa/astro-yi/src/components/GoogleAnalytics.astro";
+import BusuanziAnalytics from "@aa/astro-yi/src/components/BusuanziAnalytics.astro";
+import getUrl from "@aa/astro-yi/src/utils/getUrl";
+
+export type JsonLdInput = Record<string, unknown> | Record<string, unknown>[] | null | undefined;
+
+export interface Props {
+  title: string;
+  description: string;
+  slug: string;
+  type?: "website" | "article";
+  hero?: string;
+  published?: string;
+  updated?: string;
+  jsonLd?: JsonLdInput;
+}
+
+const {
+  title,
+  description,
+  slug,
+  hero,
+  published,
+  updated,
+  type = "website",
+  jsonLd
+} = Astro.props;
+
+const siteOrigin = Astro.site ?? new URL(site.url);
+const canonicalUrl = new URL(slug, siteOrigin);
+const absoluteOgImage = hero ? new URL(hero, siteOrigin).href : undefined;
+---
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="icon" type="image/svg+xml" href={getUrl(site.favicon)} />
+  <meta name="generator" content={Astro.generator} />
+  <title>{title}</title>
+
+  <link rel="canonical" href={canonicalUrl.href} />
+  <link rel="alternate" type="application/rss+xml" title={site.title} href={getUrl("/rss.xml")} />
+
+  <meta name="title" content={title} />
+  <meta name="description" content={description} />
+
+  <meta property="og:type" content={type} />
+  <meta property="og:url" content={canonicalUrl.href} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  {absoluteOgImage && <meta property="og:image" content={absoluteOgImage} />}
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content={canonicalUrl.href} />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  {absoluteOgImage && <meta name="twitter:image" content={absoluteOgImage} />}
+
+  {published && <meta property="article:published_time" content={published} />}
+  {updated && <meta property="article:modified_time" content={updated} />}
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="theme-color" content="#205081" />
+  <link rel="sitemap" href={getUrl("/sitemap-0.xml")} />
+  <script is:inline src={getUrl("/toggle-theme.js")} />
+
+  {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+
+  <GoogleAnalytics />
+  <UmamiAnalytics />
+  <BusuanziAnalytics />
+</head>

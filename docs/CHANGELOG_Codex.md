@@ -45,3 +45,10 @@
 - `public/favicon.svg:1` add Automation Architech icon aligned with new styling.
 - `public/images/blog-avatar.svg:1` provide avatar asset referenced by theme profile.
 - `docs/OPERATIONS.md:1` document `npm link` workflow for local theme overrides.
+
+### 2025-11-05T14:54Z — feat: harden seo and metadata
+- `docs/OPERATIONS.md:23` capture peer dependency warning for future reference.
+- `src/components/SeoHead.astro:1` centralize canonical, OG/Twitter, analytics, and JSON-LD handling.
+- `src/layouts/BaseLayout.astro:1` pass structured metadata to the new SEO head component.
+- `src/pages/blog/index.astro:1` add blog + breadcrumb JSON-LD and themed summaries.
+- `src/pages/blog/[slug].astro:1` emit article JSON-LD, canonical metadata, and enriched sidebar details.

@@ -1,27 +1,44 @@
 ---
 import "~/styles/tokens.css";
 import "@aa/astro-yi/src/styles/index.css";
-import BaseHead from "@aa/astro-yi/src/components/BaseHead.astro";
 import ThemeIcon from "@aa/astro-yi/src/components/ThemeIcon.astro";
 import ScrollToTop from "@aa/astro-yi/src/components/ScrollToTop.astro";
 import Footer from "@aa/astro-yi/src/components/Footer.astro";
 import { site } from "@/consts";
+import SeoHead from "~/components/SeoHead.astro";
 
 export interface Props {
   title?: string;
   description?: string;
   publishedAt?: Date;
+  hero?: string;
+  seoType?: "website" | "article";
+  updatedAt?: Date;
+  jsonLd?: import("~/components/SeoHead.astro").JsonLdInput;
 }
 
 const {
   title = `${site.title} Blog`,
   description = site.description,
-  publishedAt
+  publishedAt,
+  hero,
+  seoType = "website",
+  updatedAt,
+  jsonLd
 } = Astro.props;
 ---
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
-  <BaseHead title={title} description={description} />
+  <SeoHead
+    title={title}
+    description={description}
+    slug={Astro.url.pathname}
+    hero={hero}
+    type={seoType}
+    published={publishedAt ? publishedAt.toISOString() : undefined}
+    updated={updatedAt ? updatedAt.toISOString() : undefined}
+    jsonLd={jsonLd}
+  />
   <body class="min-h-screen bg-skin-secondary text-skin-base">
     <header class="fixed inset-x-0 top-0 z-40 border-b border-skin-base/20 bg-skin-fill/95 backdrop-blur">
       <div class="container flex items-center justify-between py-4">
