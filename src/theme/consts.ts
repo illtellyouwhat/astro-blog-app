@@ -7,9 +7,12 @@ import {
   comment as baseComment,
   friendshipLinks as baseFriendshipLinks,
   analytics as baseAnalytics
-} from "@aa/astro-yi/src/consts";
+} from "@aa/astro-yi/src/__original_consts";
 
 const siteUrl = process.env.SITE_URL ?? "https://automationarchitech.com";
+const siteUrlObject = new URL(siteUrl);
+const sitePath = siteUrlObject.pathname.replace(/\/$/, "");
+const derivedBaseUrl = sitePath === "/" ? "" : sitePath;
 
 export const site = {
   ...baseSite,
@@ -20,7 +23,7 @@ export const site = {
   avatar: "/images/blog-avatar.svg",
   favicon: "/favicon.svg",
   url: siteUrl,
-  baseUrl: "",
+  baseUrl: derivedBaseUrl,
   motto: "Design. Automate. Deliver.",
   recentBlogSize: 3
 };

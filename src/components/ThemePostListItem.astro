@@ -1,10 +1,10 @@
 ---
 import PostViewTitle from "@aa/astro-yi/src/components/PostViewTitle.astro";
-import getUrl from "@aa/astro-yi/src/utils/getUrl";
+import { site } from "@/consts";
 import type { ThemePostMeta } from "~/utils/themeAdapter";
 
 const { post } = Astro.props as { post: ThemePostMeta };
-const permalink = `${getUrl("/blog/")}${post.slug}/`;
+const permalink = `${site.baseUrl}/blog/${post.slug}/`.replace(/\/\/+/g, "/");
 ---
 <li class="space-y-3 rounded-xl border border-skin-base/30 bg-skin-card/80 p-6 shadow-card transition hover:border-skin-base hover:shadow-lg">
   <PostViewTitle

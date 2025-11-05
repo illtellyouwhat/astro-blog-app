@@ -3,7 +3,6 @@ import { site, analytics } from "@/consts";
 import UmamiAnalytics from "@aa/astro-yi/src/components/UmamiAnalytics.astro";
 import GoogleAnalytics from "@aa/astro-yi/src/components/GoogleAnalytics.astro";
 import BusuanziAnalytics from "@aa/astro-yi/src/components/BusuanziAnalytics.astro";
-import getUrl from "@aa/astro-yi/src/utils/getUrl";
 
 export type JsonLdInput = Record<string, unknown> | Record<string, unknown>[] | null | undefined;
 
@@ -29,9 +28,15 @@ const {
   jsonLd
 } = Astro.props;
 
+const withBase = (path: string) => `${site.baseUrl}${path}`.replace(/\/\/+/g, "/");
+
 const siteOrigin = Astro.site ?? new URL(site.url);
 const canonicalUrl = new URL(slug, siteOrigin);
 const absoluteOgImage = hero ? new URL(hero, siteOrigin).href : undefined;
+const faviconUrl = withBase(site.favicon);
+const toggleScript = withBase("/toggle-theme.js");
+const sitemapUrl = withBase("/sitemap-0.xml");
+const rssUrl = withBase("/rss.xml");
 const plausibleDomain = import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN;
 const plausibleScript = import.meta.env.PUBLIC_PLAUSIBLE_SCRIPT ?? "https://plausible.io/js/script.js";
 const plausibleApi = import.meta.env.PUBLIC_PLAUSIBLE_API ?? "https://plausible.io/api/event";
@@ -40,12 +45,12 @@ const plausibleDnt = import.meta.env.PUBLIC_PLAUSIBLE_DNT ?? "true";
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <link rel="icon" type="image/svg+xml" href={getUrl(site.favicon)} />
+  <link rel="icon" type="image/svg+xml" href={faviconUrl} />
   <meta name="generator" content={Astro.generator} />
   <title>{title}</title>
 
   <link rel="canonical" href={canonicalUrl.href} />
-  <link rel="alternate" type="application/rss+xml" title={site.title} href={getUrl("/rss.xml")} />
+  <link rel="alternate" type="application/rss+xml" title={site.title} href={rssUrl} />
 
   <meta name="title" content={title} />
   <meta name="description" content={description} />
@@ -67,8 +72,8 @@ const plausibleDnt = import.meta.env.PUBLIC_PLAUSIBLE_DNT ?? "true";
 
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="theme-color" content="#205081" />
-  <link rel="sitemap" href={getUrl("/sitemap-0.xml")} />
-  <script is:inline src={getUrl("/toggle-theme.js")} />
+  <link rel="sitemap" href={sitemapUrl} />
+  <script is:inline src={toggleScript} />
 
   {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
 

@@ -74,6 +74,7 @@
 - `docs/OPERATIONS.md:23` outline environment toggles for comments and analytics.
 
 ### 2025-11-05T15:30Z — chore: allow base path overrides
-- `astro.config.mjs:1` derive base path from `SITE_URL` (with optional `BASE_PATH` override) so GitHub Pages serves assets correctly.
-- `docs/OPERATIONS.md:1` clarify optional `BASE_PATH` usage.
-- `.github/workflows/deploy.yml:36` pass `SITE_URL`/`BASE_PATH` env values to the build step.
+- `astro.config.mjs:1` derive deployment base from `SITE_URL` and expose original theme consts via aliasing.
+- `src/components/SeoHead.astro:1` prefix static asset URLs with the computed base path.
+- `src/components/ThemePostListItem.astro:1` and `src/pages/blog/index.astro:1` generate blog links with repo base awareness.
+- `src/pages/blog/[slug].astro:1` align Utterances issue terms with base-aware routes.

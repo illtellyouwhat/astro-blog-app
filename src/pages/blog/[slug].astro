@@ -69,6 +69,8 @@ const commentsEnabled =
   (post.data.comments ?? true) &&
   import.meta.env.PUBLIC_ENABLE_COMMENTS !== "false" &&
   Boolean(import.meta.env.PUBLIC_UTTERANCES_REPO);
+
+const issueTerm = `${site.baseUrl}/blog/${post.slug}/`.replace(/\/\/+/g, "/");
 ---
 <BaseLayout
   title={post.data.title}
@@ -100,7 +102,7 @@ const commentsEnabled =
     </div>
   </article>
 
-  {commentsEnabled && <UtterancesComments issueTerm={`/blog/${post.slug}/`} />}
+  {commentsEnabled && <UtterancesComments issueTerm={issueTerm} />}
 
   <div slot="aside" class="space-y-6">
     <div class="rounded-xl border border-skin-base/20 bg-skin-card p-5 shadow-card">
