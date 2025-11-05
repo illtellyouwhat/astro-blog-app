@@ -76,3 +76,4 @@
 ### 2025-11-05T15:30Z — chore: allow base path overrides
 - `astro.config.mjs:1` honor `BASE_PATH` env for staging hosts like GitHub Pages.
 - `docs/OPERATIONS.md:1` document `BASE_PATH` variable for CI configuration.
+- `.github/workflows/deploy.yml:36` pass `BASE_PATH` and `SITE_URL` via environment instead of inline command.
