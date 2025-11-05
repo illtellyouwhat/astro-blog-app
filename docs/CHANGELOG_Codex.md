@@ -72,3 +72,7 @@
 - `src/pages/blog/[slug].astro:1` gate comments per post and append Utterances widget.
 - `src/components/SeoHead.astro:1` load Plausible script based on env configuration.
 - `docs/OPERATIONS.md:23` outline environment toggles for comments and analytics.
+
+### 2025-11-05T15:30Z — chore: allow base path overrides
+- `astro.config.mjs:1` honor `BASE_PATH` env for staging hosts like GitHub Pages.
+- `docs/OPERATIONS.md:1` document `BASE_PATH` variable for CI configuration.
