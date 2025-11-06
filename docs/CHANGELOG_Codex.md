@@ -74,7 +74,8 @@
 - `docs/OPERATIONS.md:23` outline environment toggles for comments and analytics.
 
 ### 2025-11-05T15:30Z — chore: allow base path overrides
-- `astro.config.mjs:1` derive deployment base from `SITE_URL` and expose original theme consts via aliasing.
+- `astro.config.mjs:1` derive deployment base from `SITE_URL` (default `/`) with optional `BASE_PATH`.
 - `src/components/SeoHead.astro:1` prefix static asset URLs with the computed base path.
 - `src/components/ThemePostListItem.astro:1` and `src/pages/blog/index.astro:1` generate blog links with repo base awareness.
 - `src/pages/blog/[slug].astro:1` align Utterances issue terms with base-aware routes.
+- `docs/LOGIC.md:1` document application entry points, environment variables, and URL resolution.

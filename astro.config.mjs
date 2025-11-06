@@ -8,7 +8,16 @@ const siteEnv = process.env.SITE_URL || "https://automationarchitech.com";
 const siteUrl = new URL(siteEnv);
 const repoBase = siteUrl.pathname.replace(/\/$/, "");
 const canonicalHost = siteUrl.origin + (repoBase || "");
-const normalizedBase = repoBase === "" ? "/" : repoBase;
+const normalizedBase = (() => {
+  const override = process.env.BASE_PATH;
+  if (override) {
+    return override.startsWith("/") ? override : `/${override}`;
+  }
+  if (repoBase === "" || repoBase === "/") {
+    return "/";
+  }
+  return repoBase;
+})();
 
 export default defineConfig({
   site: canonicalHost,
