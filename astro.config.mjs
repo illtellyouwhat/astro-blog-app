@@ -15,7 +15,7 @@ const normalizedBase = (() => {
   }
   if (repoBase === "" || repoBase === "/") {
     return "/";
-  }
+  }I 
   return repoBase;
 })();
 
