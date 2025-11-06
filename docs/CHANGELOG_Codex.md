@@ -79,3 +79,7 @@
 - `src/components/ThemePostListItem.astro:1` and `src/pages/blog/index.astro:1` generate blog links with repo base awareness.
 - `src/pages/blog/[slug].astro:1` align Utterances issue terms with base-aware routes.
 - `docs/LOGIC.md:1` document application entry points, environment variables, and URL resolution.
+
+### 2025-11-05T16:15Z — chore: make marketing home link configurable
+- `src/layouts/BaseLayout.astro:21` read `PUBLIC_MARKETING_URL` for home anchor (defaults to `/`).
+- `src/layouts/BaseLayout.astro:29` update nav links to respect marketing URL.

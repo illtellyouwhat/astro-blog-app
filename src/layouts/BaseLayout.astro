@@ -17,6 +17,8 @@ export interface Props {
   jsonLd?: import("~/components/SeoHead.astro").JsonLdInput;
 }
 
+const marketingUrl = import.meta.env.PUBLIC_MARKETING_URL ?? "/";
+
 const {
   title = `${site.title} Blog`,
   description = site.description,
@@ -42,9 +44,9 @@ const {
   <body class="min-h-screen bg-skin-secondary text-skin-base">
     <header class="fixed inset-x-0 top-0 z-40 border-b border-skin-base/20 bg-skin-fill/95 backdrop-blur">
       <div class="container flex items-center justify-between py-4">
-        <a class="text-lg font-semibold tracking-tight hover:text-skin-active" href="/">{site.title}</a>
+        <a class="text-lg font-semibold tracking-tight hover:text-skin-active" href={marketingUrl}>{site.title}</a>
         <nav class="hidden items-center gap-6 text-sm font-medium md:flex">
-          <a class="transition hover:text-skin-active" href="/">Home</a>
+          <a class="transition hover:text-skin-active" href={marketingUrl}>Home</a>
           <a class="transition hover:text-skin-active" href="/blog/">Blog</a>
         </nav>
         <div class="flex items-center gap-3">
