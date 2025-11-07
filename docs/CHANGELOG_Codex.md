@@ -83,3 +83,6 @@
 ### 2025-11-05T16:15Z — chore: make marketing home link configurable
 - `src/layouts/BaseLayout.astro:21` read `PUBLIC_MARKETING_URL` for home anchor (defaults to `/`).
 - `src/layouts/BaseLayout.astro:29` update nav links to respect marketing URL.
+
+### 2025-11-05T16:20Z — docs: add feature overview
+- `docs/FEATURES.md:1` document platform architecture, SEO component, comments, analytics, and env toggles for clients.
